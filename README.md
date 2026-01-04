@@ -23,8 +23,7 @@
 
 | Version | Download | Release Date |
 |---------|----------|--------------|
-| **v0.1.10** (Latest) | [AI Helper Pro-Windows-Setup.exe](https://github.com/nimto/AI_Helper_pro/releases/download/v0.1.10/AI.Helper.Pro-Windows-Setup.exe) | 2026-01-05 |
-| v0.1.4 | [AI Helper Pro-Windows-0.1.4-Setup.exe](https://github.com/nimto/AI_Helper_pro/releases/download/v0.1.4/AI.Helper.Pro-Windows-0.1.4-Setup.exe) | 2026-01-03 |
+| **v0.1.11** (Latest) | [AI Helper Pro-Windows-Setup.exe](https://github.com/nimto/AI_Helper_pro/releases/download/v0.1.11/AI.Helper.Pro-Windows-Setup.exe) | 2026-01-05 |
 
 > **Note**: macOS and Linux versions are coming soon.
 
