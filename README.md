@@ -1,7 +1,7 @@
 # AI Helper Pro
 
 <p align="center">
-  <img src="assets/Logo.png" alt="AI Helper Pro Logo" width="128" height="128">
+  <img src="assets/Logo_v2.png" alt="AI Helper Pro Logo" width="128" height="128">
 </p>
 
 <p align="center">
