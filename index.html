@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Helper Pro - AI 코딩 도구 통합 관리</title>
+  <meta name="description" content="Claude Code, Gemini CLI, Codex를 통합 관리하는 데스크톱 애플리케이션">
+  <link rel="icon" type="image/png" href="assets/Logo_v2.png">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --border: #262626;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 0;
+    }
+
+    .logo {
+      width: 128px;
+      height: 128px;
+      margin-bottom: 1.5rem;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .download-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .download-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .download-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .download-table th,
+    .download-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .download-table th {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .version-badge {
+      background: var(--gradient);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .download-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .feature-card ul {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .feature-card li {
+      margin-bottom: 0.25rem;
+    }
+
+    .requirements {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .requirements h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .requirements ul {
+      color: var(--text-muted);
+      padding-left: 1.25rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+
+      header {
+        padding: 2rem 0;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .download-table th:last-child,
+      .download-table td:last-child {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="assets/Logo_v2.png" alt="AI Helper Pro Logo" class="logo">
+      <h1>AI Helper Pro</h1>
+      <p class="tagline">AI 코딩 도구 통합 관리 데스크톱 애플리케이션</p>
+    </header>
+
+    <section class="download-section">
+      <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        다운로드
+      </h2>
+
+      <table class="download-table">
+        <thead>
+          <tr>
+            <th>버전</th>
+            <th>다운로드</th>
+            <th>릴리즈 날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>v0.1.10</strong>
+              <span class="version-badge">최신</span>
+            </td>
+            <td>
+              <a href="https://github.com/nimto/AI_Helper_pro/releases/download/v0.1.10/AI.Helper.Pro-Windows-0.1.10-Setup.exe" class="download-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                Windows 다운로드
+              </a>
+            </td>
+            <td>2026-01-05</td>
+          </tr>
+          <tr>
+            <td>v0.1.4</td>
+            <td>
+              <a href="https://github.com/nimto/AI_Helper_pro/releases/download/v0.1.4/AI.Helper.Pro-Windows-0.1.4-Setup.exe" style="color: var(--primary); text-decoration: none;">
+                AI Helper Pro-Windows-0.1.4-Setup.exe
+              </a>
+            </td>
+            <td>2026-01-03</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>참고:</strong> macOS 및 Linux 버전은 준비 중입니다.
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature-card">
+        <h3>🤖 AI 도구 통합</h3>
+        <ul>
+          <li><strong>Claude Code</strong> - Anthropic Claude 기반</li>
+          <li><strong>Gemini CLI</strong> - Google Gemini AI</li>
+          <li><strong>Codex</strong> - OpenAI Codex 기반</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3>📊 대시보드</h3>
+        <ul>
+          <li>AI 사용 통계 한눈에 보기</li>
+          <li>커뮤니티 활동 현황</li>
+          <li>소셜 (팔로워/팔로잉) 정보</li>
+          <li>최근 활동 타임라인</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3>📚 자료실</h3>
+        <ul>
+          <li>프로젝트 파일 통합 관리</li>
+          <li>이미지 미리보기 및 최적화</li>
+          <li>다양한 파일 뷰어 지원</li>
+          <li>폴더 트리 탐색 및 검색</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3>🌍 다국어 지원</h3>
+        <ul>
+          <li>한국어 (ko)</li>
+          <li>English (en)</li>
+          <li>日本語 (ja)</li>
+          <li>中文 (简/繁)</li>
+          <li>Filipino (tl)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="requirements">
+      <h2>시스템 요구사항</h2>
+      <ul>
+        <li><strong>OS:</strong> Windows 10 이상 (64-bit)</li>
+        <li><strong>RAM:</strong> 4GB 이상 권장</li>
+        <li><strong>디스크:</strong> 500MB 이상 여유 공간</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>
+        <a href="https://github.com/nimto/AI_Helper_pro/issues">이슈 리포트</a> ·
+        <a href="https://github.com/nimto/AI_Helper_pro">GitHub</a>
+      </p>
+      <p style="margin-top: 1rem;">Made with ❤️ by nimto</p>
+    </footer>
+  </div>
+</body>
+</html>
